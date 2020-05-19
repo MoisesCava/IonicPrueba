@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="ublue">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref= "/payment-order"></ion-back-button>
+    </ion-buttons>
+    <ion-title><ion-text color="light">Detalle de la orden</ion-text></ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="deleteOrder()">
+        <ion-icon color="light" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed class="ion-no-padding">
+    <ion-row>
+      <ion-col >
+        <ion-img [src]="order.imageURL"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h1 class="ion-text-center">{{order.nombre_titular}}</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col > 
+        <ion-list *ngIf="order.comments && order.comments.length > 0; else noComments">
+          <ion-item>
+            <ion-label class="ion-text-center" *ngFor="let comment of order.comments">
+              {{comment}}
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        <ng-template #noComments>
+          <ion-text>
+            <p class="ion-text-center">No hay comentarios todavia</p>
+          </ion-text>
+        </ng-template>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p class="ion-text-center">Precio: {{order.monto}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -8,9 +8,30 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'payment-order',
     pathMatch: 'full'
   },
+  {
+    path: 'payment-order',
+    children:[
+      {
+        path: "",
+        loadChildren: () => import('./payment-order/payment-order.module').then( m => m.PaymentOrderPageModule)
+      },
+      {
+        path: ":orderId",
+        loadChildren: () => import('./payment-order/order-detail/order-detail.module').then(m => m.OrderDetailPageModule)
+      }
+    ]
+  },
+  {
+    path: 'add-order',
+    loadChildren: () => import('./payment-order/add-order/add-order.module').then( m => m.AddOrderPageModule)
+  },
+  {
+    path: 'order-history',
+    loadChildren: () => import('./payment-order/order-history/order-history.module').then(m => m.OrderHistoryPageModule)
+  }
 ];
 
 @NgModule({
